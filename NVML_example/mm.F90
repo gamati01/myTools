@@ -1,25 +1,27 @@
 ! =====================================================================
-!     ****** CODICI/mm
+!     ****** myTools/mm
 !
 !     COPYRIGHT
-!       (c) 2022 by Giorgio Amati
+!       (c) 2026 by Giorgio Amati
 !     NAME
 !       mm
 !     DESCRIPTION
-!       Matrix Multiplication
-!       naive version: no optimization at all
+!       Matrix-Matrix Multiplication
+!               * naive version
+!               * CPU (serial)
+!               * GPU (openACC, kernel=1)  
 !       size of the matrix should be given at standard input
 !     INPUTS
-!       none
+!       matrix size (at standard input)
 !     OUTPUT
-!       none
+!       time, Mflops, energy for GPU
 !     TODO
 !
 !     NOTES
-!       integer variables used: i,j,k,n
-!       real variables used:    randd,a,b,c,mflop
-!                               time1, time2
-!
+!       It works if GPUs are 4, if they are less the code must be *fixed*
+!       active preprocessing flags
+!       _OPENACC
+|       NVML
 !     *****
 ! =====================================================================
 
@@ -40,9 +42,9 @@ program mm
 !
     implicit none
 !
-    integer :: i,j,k ! index
-    integer :: n                                   ! size of the matrix
-    integer :: mydev0
+    integer :: i,j,k  ! index
+    integer :: n      ! size of the matrix
+    integer :: mydev0 ! GPUs
     integer :: mydev1
     integer :: mydev2
     integer :: mydev3
@@ -70,26 +72,31 @@ program mm
     write(6,*) "--------------------------------------"
     write(6,*) " Matrix-Matrix Multiplication         "
     write(6,*) " precision used    ",precision(a(1,1))
-    write(6,*) " rel. 1, "
-
+    write(6,*) " rel. 0.75 "
+!
 #ifdef _OPENACC
-    write(6,*) " gpu version (openacc) "
+    write(6,*) " Gpu version (openacc) "
 #else
-    write(6,*) " cpu version "
-#endif 
+!
+    write(6,*) " Cpu version "
+#endif
+!
 #ifdef NVML
     write(6,*) " NVML enabled "
 #endif 
+!
     write(6,*) " Which matrix size?                   "
     read(5,*) n
     write(6,*) " Matrix size      =", n
     write(6,*) " Memory size (MB) =", 3*n*n*my_kind/1024/1024 
     write(6,*) "--------------------------------------"
 !
+! allocate arrays 
     allocate(a(1:n,1:n))
     allocate(b(1:n,1:n))
     allocate(c(1:n,1:n))
 !
+! set some variables
     mflops = 2*float(n)*float(n)*float(n)/(1000.0*1000.0)
     check = 0.0
     mydev0 = 0
@@ -97,20 +104,18 @@ program mm
     mydev2 = 2
     mydev3 = 3
 !
-! initialization
+! initialization arrays
     call timing(time1)
     call random_number(a)
     call random_number(b)
     c = 0._my_kind
     call timing(time2)
-    write(*,*) "initialization", time2-time1
-    write(*,*) a(n/2,n/2),b(n/2,n/2),c(n/2,n/2)
+    write(*,*) " Time initialization", time2-time1
+    write(*,*) " Check arrays       ",a(n/2,n/2),b(n/2,n/2),c(n/2,n/2)
 !
-!    
-! main loop
+! computational Core
     call system("date       > time.log")
     call timing(time1)
-!
 !
 #ifdef NVML
     mydev0_c=int(mydev0,kind=c_int)
@@ -129,12 +134,13 @@ program mm
 #endif
 !
     do j = 1, n
-    do k = 1, n
-    do i = 1, n
+       do k = 1, n
+          do i = 1, n
              c(i,j) = c(i,j) + a(i,k)*b(k,j)
+          enddo
+       enddo
     enddo
-    enddo
-    enddo
+!
 #ifdef _OPENACC
 !$acc end kernels
 !$acc end data
@@ -164,7 +170,6 @@ program mm
     write(6,*) "GPU3:Energy       (J)       ", (energy3_2-energy3_1)/1000
     write(6,*) "GPU3:Mean Power   (W)       ", (energy3_2-energy3_1)/1000.0/(time2-time1)
     write(6,*) "----------------------------"
-
 !
 end program mm
 
