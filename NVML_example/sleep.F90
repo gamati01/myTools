@@ -4,7 +4,7 @@
 !     COPYRIGHT
 !       (c) 2026 by Giorgio Amati
 !     NAME
-!       sleel
+!       sleep
 !     DESCRIPTION
 !       example of use of NVML to get energy 
 !     INPUTS
