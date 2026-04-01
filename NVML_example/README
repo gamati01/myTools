@@ -1,5 +1,6 @@
 In this directory there are two different example of integraton of NVML call (to extract GPU enery) with fortran code.
-
+* mm.F90
+* sleep.F90
 
 CAVEAT:
 in this version it was tested noly using leonardo.
