@@ -65,13 +65,11 @@ program mm
     real(my_kind), dimension(:,:), allocatable:: b ! matrix (origin)
     real(my_kind), dimension(:,:), allocatable:: c ! matrix (destination)
     real(my_kind):: time1, time2 ! timing
-    real(my_kind):: time3, time4 ! timing
     real(my_kind):: mflops ! Mflops
-    real(dp_kind):: check
 !
     write(6,*) "--------------------------------------"
     write(6,*) " Matrix-Matrix Multiplication         "
-    write(6,*) " precision used    ",precision(a(1,1))
+    write(6,*) " precision used    ", precision(0.0_my_kind)
     write(6,*) " rel. 0.75 "
 !
 #ifdef _OPENACC
@@ -88,7 +86,7 @@ program mm
     write(6,*) " Which matrix size?                   "
     read(5,*) n
     write(6,*) " Matrix size      =", n
-    write(6,*) " Memory size (MB) =", 3*n*n*my_kind/1024/1024 
+    write(6,*) " Memory size (MB) =", 3_int64*n*n*my_kind / 1024.0 / 1024.0
     write(6,*) "--------------------------------------"
 !
 ! allocate arrays 
@@ -97,7 +95,7 @@ program mm
     allocate(c(1:n,1:n))
 !
 ! set some variables
-    mflops = 2*float(n)*float(n)*float(n)/(1000.0*1000.0)
+    mflops = 2.0_my_kind * real(n, my_kind)**3 / 1.0e6_my_kind
     check = 0.0
     mydev0 = 0
     mydev1 = 1
@@ -122,10 +120,26 @@ program mm
     mydev1_c=int(mydev1,kind=c_int)
     mydev2_c=int(mydev2,kind=c_int)
     mydev3_c=int(mydev3,kind=c_int)
+!
     ierrc=get_gpu_energy_mJ_u64(mydev0_c,energy0_1)
+    if (ierrc /= 0_c_int) then
+       write(*,*) "NVML error reading energy for device 0", dev, "err=", ierrc
+    endif
+!
     ierrc=get_gpu_energy_mJ_u64(mydev1_c,energy1_1)
+    if (ierrc /= 0_c_int) then
+       write(*,*) "NVML error reading energy for device 1", dev, "err=", ierrc
+    endif
+!
     ierrc=get_gpu_energy_mJ_u64(mydev2_c,energy2_1)
+    if (ierrc /= 0_c_int) then
+       write(*,*) "NVML error reading energy for device 2", dev, "err=", ierrc
+    endif
+!
     ierrc=get_gpu_energy_mJ_u64(mydev3_c,energy3_1)
+    if (ierrc /= 0_c_int) then
+       write(*,*) "NVML error reading energy for device 3", dev, "err=", ierrc
+    endif
 #endif
 !
 #ifdef _OPENACC
