@@ -96,7 +96,6 @@ program mm
 !
 ! set some variables
     mflops = 2.0_my_kind * real(n, my_kind)**3 / 1.0e6_my_kind
-    check = 0.0
     mydev0 = 0
     mydev1 = 1
     mydev2 = 2
@@ -123,22 +122,22 @@ program mm
 !
     ierrc=get_gpu_energy_mJ_u64(mydev0_c,energy0_1)
     if (ierrc /= 0_c_int) then
-       write(*,*) "NVML error reading energy for device 0", dev, "err=", ierrc
+       write(*,*) "NVML error reading energy for device 0, "err=", ierrc
     endif
 !
     ierrc=get_gpu_energy_mJ_u64(mydev1_c,energy1_1)
     if (ierrc /= 0_c_int) then
-       write(*,*) "NVML error reading energy for device 1", dev, "err=", ierrc
+       write(*,*) "NVML error reading energy for device 1, "err=", ierrc
     endif
 !
     ierrc=get_gpu_energy_mJ_u64(mydev2_c,energy2_1)
     if (ierrc /= 0_c_int) then
-       write(*,*) "NVML error reading energy for device 2", dev, "err=", ierrc
+       write(*,*) "NVML error reading energy for device 2, "err=", ierrc
     endif
 !
     ierrc=get_gpu_energy_mJ_u64(mydev3_c,energy3_1)
     if (ierrc /= 0_c_int) then
-       write(*,*) "NVML error reading energy for device 3", dev, "err=", ierrc
+       write(*,*) "NVML error reading energy for device 3, "err=", ierrc
     endif
 #endif
 !
