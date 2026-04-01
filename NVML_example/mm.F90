@@ -108,7 +108,9 @@ program mm
     c = 0._my_kind
     call timing(time2)
     write(*,*) " Time initialization", time2-time1
-    write(*,*) " Check arrays       ",a(n/2,n/2),b(n/2,n/2),c(n/2,n/2)
+    write(*,*) " Check array a       ",a(n/2,n/2)
+    write(*,*) " Check array b       ",b(n/2,n/2)
+    write(*,*) " Check array c       ",c(n/2,n/2)
 !
 ! computational Core
     call system("date       > time.log")
