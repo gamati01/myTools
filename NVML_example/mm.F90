@@ -176,13 +176,13 @@ program mm
     write(6,*) "GPU:MFLOPS                  ", mflops/(time2-time1)
     write(6,*) "GPU:check                   ", c(n/2-1,n/2-1)
     write(6,*) "----------------------------"
-    write(6,*) "GPU0:Energy       (J)       ", (energy0_2-energy0_1)/1000
+    write(6,*) "GPU0:Energy       (J)       ", (energy0_2-energy0_1)/1000.0
     write(6,*) "GPU0:Mean Power   (W)       ", (energy0_2-energy0_1)/1000.0/(time2-time1)
-    write(6,*) "GPU1:Energy       (J)       ", (energy1_2-energy1_1)/1000
+    write(6,*) "GPU1:Energy       (J)       ", (energy1_2-energy1_1)/1000.0
     write(6,*) "GPU1:Mean Power   (W)       ", (energy1_2-energy1_1)/1000.0/(time2-time1)
-    write(6,*) "GPU2:Energy       (J)       ", (energy2_2-energy2_1)/1000
+    write(6,*) "GPU2:Energy       (J)       ", (energy2_2-energy2_1)/1000.0
     write(6,*) "GPU2:Mean Power   (W)       ", (energy2_2-energy2_1)/1000.0/(time2-time1)
-    write(6,*) "GPU3:Energy       (J)       ", (energy3_2-energy3_1)/1000
+    write(6,*) "GPU3:Energy       (J)       ", (energy3_2-energy3_1)/1000.0
     write(6,*) "GPU3:Mean Power   (W)       ", (energy3_2-energy3_1)/1000.0/(time2-time1)
     write(6,*) "----------------------------"
 !
