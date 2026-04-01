@@ -20,8 +20,8 @@
 !     NOTES
 !       It works if GPUs are 4, if they are less the code must be *fixed*
 !       active preprocessing flags
-!       _OPENACC
-|       NVML
+!       * _OPENACC
+!       * NVML
 !     *****
 ! =====================================================================
 
@@ -86,7 +86,7 @@ program mm
     write(6,*) " Which matrix size?                   "
     read(5,*) n
     write(6,*) " Matrix size      =", n
-    write(6,*) " Memory size (MB) =", 3_int64*n*n*my_kind / 1024.0 / 1024.0
+    write(6,*) " Memory size (MB) =", 3_my_kind*n*n*my_kind / 1024.0 / 1024.0
     write(6,*) "--------------------------------------"
 !
 ! allocate arrays 
