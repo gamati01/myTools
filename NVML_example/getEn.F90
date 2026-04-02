@@ -10,7 +10,7 @@
 !     INPUTS
 !       none
 !     OUTPUT
-!       energy, time
+!       total energy per GPU, unix time
 !     TODO
 !
 !     NOTES
@@ -22,8 +22,8 @@
 !
 program getEn
 !
-    use timing_module
-!
+    use precision_module
+    use unix_time_mod
     use iso_c_binding
     use nvml_interface
 !
@@ -44,7 +44,7 @@ program getEn
     integer(c_int) :: mydev2_c
     integer(c_int) :: mydev3_c
 !
-    real(my_kind):: time1, time2 ! timing
+    real(my_kind):: Utime       ! timing
 !
 !    write(6,*) "--------------------------------------"
 !    write(6,*) " getEn                                "
@@ -85,11 +85,13 @@ program getEn
        write(*,*) "NVML error reading energy for device 3, err=", ierrc
     endif
 !    
+    utime = unix_time()
+!    
 !   Energy output in J 
-    write(6,*) "GPU0:Energy (J),", (energy0_1)/1000.0
-    write(6,*) "GPU1:Energy (J),", (energy1_1)/1000.0
-    write(6,*) "GPU2:Energy (J),", (energy2_1)/1000.0
-    write(6,*) "GPU3:Energy (J),", (energy3_1)/1000.0
+    write(6,*) "GPU0:Unix Time, Energy (J),", utime, (energy0_1)/1000.0
+    write(6,*) "GPU1:Unix Time, Energy (J),", utime, (energy1_1)/1000.0
+    write(6,*) "GPU2:Unix Time, Energy (J),", utime, (energy2_1)/1000.0
+    write(6,*) "GPU3:Unix Time, Energy (J),", utime, (energy3_1)/1000.0
 !
 end program getEn
 
