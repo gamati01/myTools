@@ -1,11 +1,12 @@
-In this directory there are two different example of integraton of NVML call (to extract GPU enery) with fortran code.
-* mm.F90 is a Fortran program that performs naive dense matrix–matrix multiplication C = A*B for an n×n matrix size read from standard input.
+In this directory there are three different example of integraton of NVML call (to extract GPU enery) with fortran code.
+* mm.F90: it is a Fortran program that performs naive dense matrix–matrix multiplication C = A*B for an n×n matrix size read from standard input.
 It can run in CPU serial mode or GPU mode via OpenACC (single kernels region).
 When compiled with NVML, it queries GPU energy usage (assumes exactly 4 GPUs: devices 0–3) before/after the kernel.
 It reports runtime, MFLOPS, and per-GPU energy (J) / mean power (W), plus a simple result check value.
-* sleep.F90 is a minimal Fortran program demonstrating NVML-based GPU energy measurement.
+* sleep.F90: it is a minimal Fortran program demonstrating NVML-based GPU energy measurement.
 After sleeping it samples energy again and computes per-GPU energy (J) and mean power (W) using elapsed time.
 It also logs timestamps to time.log and uses timing_module for wall-clock timing.
+* getEn: it is a simple Fortran program that returns the total energy (in Joule) consumed so far
 
 
 CAVEAT:
