@@ -11,7 +11,7 @@ It can be used as CLI in a job script to get pre/post Job Energy consumption.
 
 
 CAVEAT:
-in this version it was tested noly using leonardo.
+These programs were tested using leonardo (A100) and pitagora (H100) GPUs.
 
 ACKNOWLEDGMENT:
 The NVML wrapper was "Deeply Inspired" by Marco Lauricella's work (lauricella.marco@gmail.com). Thanks!
