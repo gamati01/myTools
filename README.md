@@ -6,4 +6,4 @@ Each directory is a different "tool".
 
 Up today, these are the different "tools" available
 
-* NVML_example: three fortran-based programs with an interface tp nvml to track GPU energy.
+* NVML_example: three fortran-based programs with an interface to nvml to track (only) GPU energy.
