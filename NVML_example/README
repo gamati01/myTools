@@ -16,6 +16,9 @@ These programs were tested using
   * pitagora (H100)
   * g100 (V100)
 
+BUG:
+It works if there are 4 GPUs in a node. For less there's an error and the relative figure is meaningless
+
 ACKNOWLEDGMENT:
 The NVML wrapper was "Deeply Inspired" by Marco Lauricella's work (lauricella.marco@gmail.com). Thanks!
 
