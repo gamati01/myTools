@@ -23,3 +23,17 @@ At the moment works only with NVIDIA GPUs
  -------------------------
  Peak BW   (GB/s)    1631.232    
  -------------------------
+
+ -------------------------
+ Device #            3
+ NAME    NVIDIA H100
+ Freq  (GPU, Mhz)              1980
+ Freq  (HBM, Mhz)              1593
+ Bus Width (bits)              6144
+ SP to DP ratio                   2
+ ECC enabled                      1
+ Max Threads per node          1024
+ -------------------------
+ Peak BW   (GB/s)    2446.848    
+ -------------------------
+
