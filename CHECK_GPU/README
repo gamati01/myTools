@@ -1,1 +1,25 @@
 
+Simple program to "play" with GPU
+
+LIMITATION
+At the moment works only with NVIDIA GPUs
+
+* checkGPU: cudafortran program, it perform a simple query to understand the main features of the GPU
+
+[gamati01@lrdn2525 CHECK_GPU]$ ./a.out 
+ INFO: -------------------------
+ INFO: found            4  GPUs 
+ INFO: -------------------------
+                          
+ -------------------------
+ Device #            0
+ NAME    NVIDIA A100-SXM-64GB
+ Freq  (GPU, Mhz)              1395
+ Freq  (HBM, Mhz)              1593
+ Bus Width (bits)              4096
+ SP to DP ratio                   2
+ ECC enabled                      1
+ Max Threads per node          1024
+ -------------------------
+ Peak BW   (GB/s)    1631.232    
+ -------------------------
