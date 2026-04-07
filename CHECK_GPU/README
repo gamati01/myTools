@@ -23,6 +23,7 @@ At the moment works only with NVIDIA GPUs
  -------------------------
  Peak BW   (GB/s)    1631.232    
  -------------------------
+...
 
  -------------------------
  Device #            3
@@ -35,5 +36,19 @@ At the moment works only with NVIDIA GPUs
  Max Threads per node          1024
  -------------------------
  Peak BW   (GB/s)    2446.848    
+ -------------------------
+....
+
+ -------------------------
+ Device #            1
+ NAME    Tesla V100S-PCIE-32GB
+ Freq  (GPU, Mhz)              1597
+ Freq  (HBM, Mhz)              1107
+ Bus Width (bits)              4096
+ SP to DP ratio                   2
+ ECC enabled                      1
+ Max Threads per node          1024
+ -------------------------
+ Peak BW   (GB/s)    1133.568    
  -------------------------
 
