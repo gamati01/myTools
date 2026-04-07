@@ -7,3 +7,4 @@ Each directory is a different "tool".
 Up today, these are the different "tools" available
 
 * NVML_example: three fortran-based programs with an interface to nvml to track (only) GPU energy.
+* CHECK_GPU: very simple program to "play" with GPU (onlt Nvidia so far)
