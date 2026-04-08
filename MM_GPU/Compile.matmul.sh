@@ -1,6 +1,10 @@
 #
+# PItagora: use 24.9
+#
+# Leonardo (24.9 not working corrrectly): 
 module purge
-module load nvhpc/24.9
+module load profile/global
+module load nvhpc/25.3
 module li
 #
 rm -rf *.o *.x *.mod
@@ -8,17 +12,25 @@ rm -rf *.o *.x *.mod
 COMP=nvfortran
 #
 OPT="-O3 "
-echo "compiling with " $COMP $OPT
+echo "compiling serial vestion with " $COMP $OPT
 $COMP $OPT mod_tools.F90 -c
-$COMP $OPT mm.F90 -c
-$COMP $OPT mod_tools.o mm.o -o mm.matmul.serial.x
+$COMP $OPT mm.matmul.F90 -c
+$COMP $OPT mod_tools.o mm.matmul.o -o mm.matmul.serial.x
 #
 rm -rf *.o 
-#OPT="-O3 -acc -gpu=managed -cuda -cudalib -Minfo=acc -DSINGLEPRECISION"
-OPT="-O3 -acc -gpu=managed -cuda -cudalib -Minfo=acc"
-echo "compiling with " $COMP $OPT 
+#
+OPT="-O3 "
+echo "compiling serial+validation with " $COMP $OPT
 $COMP $OPT mod_tools.F90 -c
-$COMP $OPT mm.F90 -c
-#$COMP $OPT mod_tools.o mm.o -L/g100_work/PROJECTS/spack/v0.17/prod/0.17.1/install/0.17/linux-centos8-skylake_avx512/gcc-8.4.1/cuda-11.5.0-ktwkkqqhebhe64r4ial5g632vefweb4i/lib64/ -o mm.matmul.gpu.x
-$COMP $OPT mod_tools.o mm.o -o mm.matmul.gpu.x
+$COMP $OPT -DVALIDATION mm.matmul.F90 -c
+$COMP $OPT mod_tools.o mm.matmul.o -o mm.matmul.validation.x
+#
+#OPT="-O3 -acc -gpu=managed -cuda -cudalib -Minfo=acc -DSINGLEPRECISION"
+#
+OPT="-O3 -acc -gpu=managed -cuda -cudalib -Minfo=acc"
+echo "compiling GPU with " $COMP $OPT 
+$COMP $OPT mod_tools.F90 -c
+$COMP $OPT mm.matmul.F90 -c
 echo "That's all folks!!!"
+
+
