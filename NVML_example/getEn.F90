@@ -44,7 +44,7 @@ program getEn
     integer(c_int) :: mydev2_c
     integer(c_int) :: mydev3_c
 !
-    real(my_kind):: Utime       ! timing
+    integer(my_kind):: utime       ! timing
 !
 !    write(6,*) "--------------------------------------"
 !    write(6,*) " getEn                                "
@@ -88,10 +88,15 @@ program getEn
     utime = unix_time()
 !    
 !   Energy output in J 
-    write(6,*) "GPU0:Unix Time, Energy (J),", utime, (energy0_1)/1000.0
-    write(6,*) "GPU1:Unix Time, Energy (J),", utime, (energy1_1)/1000.0
-    write(6,*) "GPU2:Unix Time, Energy (J),", utime, (energy2_1)/1000.0
-    write(6,*) "GPU3:Unix Time, Energy (J),", utime, (energy3_1)/1000.0
+    write(6,1500) utime, (energy1_1)/1000.0
+    write(6,1501) utime, (energy1_1)/1000.0
+    write(6,1502) utime, (energy2_1)/1000.0
+    write(6,1503) utime, (energy3_1)/1000.0
 !
+1500  format(" # GPU0: Unix Time, Energy (J),", 1(i12),1(f14.3))
+1501  format(" # GPU1: Unix Time, Energy (J),", 1(i12),1(f14.3))
+1502  format(" # GPU2: Unix Time, Energy (J),", 1(i12),1(f14.3))
+1503  format(" # GPU3: Unix Time, Energy (J),", 1(i12),1(f14.3))
+
 end program getEn
 
