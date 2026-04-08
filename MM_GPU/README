@@ -1,2 +1,9 @@
 
-Some MM code for GPU
+Some MM code for GPU. Compile.matmul.sh creates 4 different exe
+* mm.matmul.serial.x: a CPU version of matmul
+* mm.matmul.validation.x: a CPU version of matmul with validation of the result
+* mm.matmul.gpu.x: a GPU version of matmul 
+* mm.matmul.gpu.validation.x: a GPU version of matmul with result validation
+
+CAVEAT: 
+with leonardo use nvhpc 25.4, 24.9 doesn't work.....
