@@ -18,7 +18,6 @@ $COMP $OPT mm.matmul.F90 -c
 $COMP $OPT mod_tools.o mm.matmul.o -o mm.matmul.serial.x
 #
 rm -rf *.o 
-#
 OPT="-O3 "
 echo "compiling serial+validation with " $COMP $OPT
 $COMP $OPT mod_tools.F90 -c
@@ -27,10 +26,17 @@ $COMP $OPT mod_tools.o mm.matmul.o -o mm.matmul.validation.x
 #
 #OPT="-O3 -acc -gpu=managed -cuda -cudalib -Minfo=acc -DSINGLEPRECISION"
 #
+rm -rf *.o 
 OPT="-O3 -acc -gpu=managed -cuda -cudalib -Minfo=acc"
 echo "compiling GPU with " $COMP $OPT 
 $COMP $OPT mod_tools.F90 -c
 $COMP $OPT mm.matmul.F90 -c
+$COMP $OPT mod_tools.o mm.matmul.o -o mm.matmul.gpu.x
+#
+rm -rf *.o
+OPT="-O3 -acc -gpu=managed -cuda -cudalib -Minfo=acc"
+echo "compiling GPU with " $COMP $OPT
+$COMP $OPT mod_tools.F90 -c
+$COMP $OPT mm.matmul.F90 -DVALIDATION -c
+$COMP $OPT mod_tools.o mm.matmul.o -o mm.matmul.gpu.validation.x
 echo "That's all folks!!!"
-
-
