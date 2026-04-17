@@ -2,3 +2,4 @@ Some script for accessing info from slurm.
 Probably there's in the web much better script....
 
 * jobInfo: returns for a single jobid some info, if activated on leonardo also energy (looking at BEO logs)
+* userInfo: returns the jobs submitted in the last 7 days. You van chaenge the time interval
