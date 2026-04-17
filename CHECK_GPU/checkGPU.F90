@@ -34,19 +34,22 @@
                    write(6,*) "SP to DP ratio       ", prop%singleToDoublePrecisionPerfRatio
                    write(6,*) "ECC enabled          ", prop%ECCEnabled
                    write(6,*) "Max Threads per node ", prop%maxThreadsPerBlock
-                   write(6,*) "-------------------------"
-                   write(6,*) "Peak BW   (GB/s)",            & 
+                   write(6,*) "SM available         ", prop%multiProcessorCount
+                   write(6,*) "--------Derived figures------"
+                   write(6,*) "Cuda cores           ",       & 
+                               prop%multiProcessorCount*64
+                   write(6,*) "Peak BW   (GB/s)     ",       & 
                                2.0*(prop%memoryBusWidth/8)*  &
                                (prop%memoryClockRate/1000)/  &
                                1000
+                   write(6,*) "Peak FP64 (TF/s)     ",            &
+                               2.0*prop%multiProcessorCount*64.0*     &
+                               ((prop%clockrate/1000.0)/1000.0)/1000.0
+                   write(6,*) "Peak FP32 (TF/s)     ",            &
+                               4.0*prop%multiProcessorCount*64.0*     &
+                               ((prop%clockrate/1000.0)/1000.0)/1000.0
                    write(6,*) "-------------------------"
-!              
-!                   iunit = 666 + i
-!                   write(iunit,*) prop
               enddo
-!
-         
-
+!       
       end program checkGPU
-!
 
