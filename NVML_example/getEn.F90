@@ -88,7 +88,7 @@ program getEn
     utime = unix_time()
 !    
 !   Energy output in J 
-    write(6,1500) utime, (energy1_1)/1000.0
+    write(6,1500) utime, (energy0_1)/1000.0
     write(6,1501) utime, (energy1_1)/1000.0
     write(6,1502) utime, (energy2_1)/1000.0
     write(6,1503) utime, (energy3_1)/1000.0
